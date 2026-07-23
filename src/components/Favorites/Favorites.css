@@ -1,12 +1,35 @@
 .favorites-sidebar {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 16px;
   padding: 20px;
   height: fit-content;
-  max-height: 80vh;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
   overflow-y: auto;
   box-shadow: 0 4px 12px rgba(196, 184, 168, 0.15);
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.favorites-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.favorites-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 10px 0;
+}
+
+.favorites-sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 10px;
+}
+
+.favorites-sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text);
 }
 
 .favorites-header {
@@ -14,14 +37,28 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   border-bottom: 1px solid var(--border);
 }
 
 .favorites-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.icon-wrapper {
+  background-color: var(--favorite);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper .heart-icon path {
+  stroke: var(--green);
 }
 
 .favorites-container p {
@@ -39,23 +76,28 @@
 .favorites-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
 .favorite-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--secondary);
+  gap: 12px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
   position: relative;
 }
 
+.favorite-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
 .favorite-item img {
-  width: 40px;
-  height: 55px;
+  width: 45px;
+  height: 60px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--secondary);
 }
 
@@ -65,34 +107,39 @@
 }
 
 .favorite-item-title {
-  font-size: 13px;
-  font-weight: 500;
+  font-family: "Playfair Display", serif;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--title);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
 
 .favorite-item-author {
-  font-size: 11px;
+  display: block;
+  font-size: 12px;
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
 
 .favorite-item-year {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text);
 }
 
 .remove-favorite-btn {
   background: none;
   border: none;
-  color: var(--red);
   cursor: pointer;
-  font-size: 16px;
   padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .empty-favorites {

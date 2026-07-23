@@ -23,6 +23,11 @@ export function createIntro() {
       </div>
       <div id="input-error-message" class="input-error-message" style="display: none;"></div>
     </div>
+    <div class="btn-wrapper"
+      <button id="view-favorites-mobile-btn" class="view-favorites-mobile-btn">
+        <span>View Favorites</span>
+      </button>
+    </div>
   `;
   return section;
 }

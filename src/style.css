@@ -70,7 +70,6 @@ img.icon {
   font-size: 24px;
   width: 42px;
   height: 42px;
-  background-color: var(--green);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -81,6 +80,4 @@ img.icon {
 .icon-wrapper img.icon {
   width: 60%;
   height: 60%;
-  color: var(--white);
-  filter: brightness(0) invert(1);
 }

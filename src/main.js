@@ -2,7 +2,10 @@ import "./style.css";
 import { createHeader } from "./components/Header/Header.js";
 import { createIntro } from "./components/Intro/Intro.js";
 import { createCatalog } from "./components/Catalog/Catalog.js";
-import { createFavorites } from "./components/Favorites/Favorites.js";
+import {
+  createFavorites,
+  updateFavoritesSidebar,
+} from "./components/Favorites/Favorites.js";
 import { createFooter } from "./components/Footer/Footer.js";
 import { createBookCard } from "./components/BookCard/BookCard.js";
 import { fetchBooks } from "./services/api.js";
@@ -25,6 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
   appContainer.appendChild(createHeader());
   appContainer.appendChild(mainContent);
   appContainer.appendChild(createFooter());
+
+  updateFavoritesSidebar();
 
   async function renderBooks(query) {
     const booksGrid = document.getElementById("books-grid");
@@ -113,4 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   renderBooks("art");
+
+  document
+    .getElementById("view-favorites-mobile-btn")
+    ?.addEventListener("click", () => {
+      const sidebar = document.getElementById("favorites-sidebar-section");
+      if (sidebar) {
+        sidebar.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
 });
