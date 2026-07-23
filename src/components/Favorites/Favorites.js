@@ -49,8 +49,13 @@ export function updateFavoritesSidebar() {
   favorites.forEach((book) => {
     const item = document.createElement("div");
     item.className = "favorite-item";
+
+    const coverContent = book.coverUrl
+      ? `<img src="${book.coverUrl}" alt="${book.title}" />`
+      : `<div class="no-cover-placeholder"><span>No cover</span></div>`;
+
     item.innerHTML = `
-      ${book.coverUrl ? `<img src="${book.coverUrl}" alt="${book.title}" />` : `<div style="width:40px;height:55px;background:var(--secondary);border-radius:4px;"></div>`}
+      ${coverContent}
       <div class="favorite-item-info">
         <p class="favorite-item-title">${book.title}</p>
         <span class="favorite-item-author">${book.author}</span>

@@ -148,3 +148,22 @@
   font-size: 13px;
   padding: 20px 0;
 }
+
+.no-cover-placeholder {
+  width: 45px;
+  height: 60px;
+  background: var(--secondary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.no-cover-placeholder span {
+  font-size: 9px;
+  line-height: 1.1;
+  color: var(--text);
+  width: 100%;
+}

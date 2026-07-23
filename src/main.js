@@ -1,6 +1,10 @@
 import "./style.css";
 import { createHeader } from "./components/Header/Header.js";
-import { createIntro } from "./components/Intro/Intro.js";
+import {
+  createIntro,
+  initAuthorFilter,
+  filterBooksByAuthor,
+} from "./components/Intro/Intro.js";
 import { createCatalog } from "./components/Catalog/Catalog.js";
 import {
   createFavorites,
@@ -31,6 +35,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateFavoritesSidebar();
 
+  let currentBooks = [];
+
+  function renderBooksGrid(booksToRender) {
+    const booksGrid = document.getElementById("books-grid");
+    const statusMessage = document.getElementById("status-message");
+    if (!booksGrid || !statusMessage) return;
+
+    booksGrid.innerHTML = "";
+
+    if (booksToRender.length === 0) {
+      statusMessage.textContent = "Nothing found";
+      statusMessage.style.display = "block";
+      return;
+    }
+
+    statusMessage.style.display = "none";
+
+    booksToRender.forEach((book) => {
+      const cardElement = createBookCard(book);
+      booksGrid.appendChild(cardElement);
+    });
+  }
+
   async function renderBooks(query) {
     const booksGrid = document.getElementById("books-grid");
     const statusMessage = document.getElementById("status-message");
@@ -45,25 +72,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (rawBooks.length === 0) {
       statusMessage.textContent = "Nothing found";
       statusMessage.style.display = "block";
+      currentBooks = [];
+      initAuthorFilter([], () => {});
       return;
     }
 
     statusMessage.style.display = "none";
 
-    rawBooks.forEach((bookData) => {
-      const book = {
-        title: bookData.title,
-        author: bookData.author_name
-          ? bookData.author_name[0]
-          : "Unknown Author",
-        firstPublishYear: bookData.first_publish_year,
-        coverUrl: bookData.cover_i
-          ? `https://covers.openlibrary.org/b/id/${bookData.cover_i}-M.jpg`
-          : null,
-      };
+    currentBooks = rawBooks.map((bookData) => ({
+      title: bookData.title,
+      author: bookData.author_name ? bookData.author_name[0] : "Unknown Author",
+      firstPublishYear: bookData.first_publish_year,
+      coverUrl: bookData.cover_i
+        ? `https://covers.openlibrary.org/b/id/${bookData.cover_i}-M.jpg`
+        : null,
+    }));
 
-      const cardElement = createBookCard(book);
-      booksGrid.appendChild(cardElement);
+    renderBooksGrid(currentBooks);
+
+    initAuthorFilter(currentBooks, (selectedAuthor) => {
+      const filtered = filterBooksByAuthor(currentBooks, selectedAuthor);
+      renderBooksGrid(filtered);
     });
   }
 

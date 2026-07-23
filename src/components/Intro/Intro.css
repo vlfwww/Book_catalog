@@ -155,3 +155,54 @@
     background: var(--secondary, #f4f1ea);
   }
 }
+
+.filter-container {
+  margin: 20px 0;
+}
+
+.author-filter-select {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e5e0d8);
+  color: var(--title, #2c2521);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-family: "Playfair Display", serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(196, 184, 168, 0.15);
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 250px;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.author-filter-select:hover {
+  border-color: var(--green, #27694d);
+}
+
+.author-filter-select:focus {
+  border-color: var(--green, #27694d);
+  box-shadow: 0 0 0 3px rgba(39, 105, 77, 0.1);
+}
+
+.author-filter-select::-webkit-scrollbar {
+  width: 6px;
+}
+
+.author-filter-select::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 6px 0;
+}
+
+.author-filter-select::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 10px;
+}
+
+.author-filter-select::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text);
+}
