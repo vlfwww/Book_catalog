@@ -25,6 +25,25 @@
   --favorite: #eaf0ed;
 }
 
+body.dark-theme {
+  --white: #24211e;
+  --green: #40a075;
+  --yellow: #e5c158;
+  --red: #f87171;
+  --brown: #e7e2da;
+  --black: #f7f4ef;
+
+  --title: #f7f4ef;
+  --text: #b8b0a6;
+  --border: #383129;
+
+  --background: #1a1816;
+  --card: #24211e;
+  --secondary: #2e2a26;
+  --shadow: #11100f;
+  --favorite: #1b2e24;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -36,6 +55,9 @@ body {
   background-color: var(--background);
   color: var(--black);
   line-height: 1.5;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .app-container {
