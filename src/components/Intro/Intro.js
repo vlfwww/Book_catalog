@@ -19,9 +19,8 @@ export function createIntro(books = [], onFilterChange = () => {}) {
             placeholder="Search for books by title or author..."
           />
         </div>
-        <button id="search-btn">Search</button>
       </div>
-      <div id="input-error-message" class="input-error-message" style="display: none;"></div>
+      <div id="input-error-message" class="input-error-message"></div>
     </div>
     <div class="btn-wrapper">
       <button id="view-favorites-mobile-btn" class="view-favorites-mobile-btn">

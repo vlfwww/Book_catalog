@@ -13,9 +13,12 @@ import {
 import { createFooter } from "./components/Footer/Footer.js";
 import { createBookCard } from "./components/BookCard/BookCard.js";
 import { fetchBooks } from "./services/api.js";
+import { debounce } from "./utils/debounce.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const appContainer = document.getElementById("app");
+
+  appContainer.appendChild(createHeader());
 
   const mainContent = document.createElement("main");
   mainContent.className = "main-content";
@@ -29,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   mainContent.appendChild(createIntro());
   mainContent.appendChild(contentLayout);
 
-  appContainer.appendChild(createHeader());
   appContainer.appendChild(mainContent);
   appContainer.appendChild(createFooter());
 
@@ -117,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const searchInput = document.getElementById("search-input");
-  const searchBtn = document.getElementById("search-btn");
   const searchWrapper = document.getElementById("search-wrapper");
   const inputErrorMessage = document.getElementById("input-error-message");
 
@@ -132,37 +133,41 @@ document.addEventListener("DOMContentLoaded", () => {
     inputErrorMessage.style.display = "none";
   }
 
-  function handleSearch() {
-    const query = searchInput.value.trim();
+  if (searchInput) {
+    const debouncedSearch = debounce(() => {
+      const query = searchInput.value.trim();
 
-    if (!query) {
-      showError("Please enter a search query.");
-      return;
-    }
+      if (!query) {
+        hideError();
+        return;
+      }
 
-    if (query.length < 3) {
-      showError("Please enter at least 3 characters for search.");
-      return;
-    }
+      if (query.length < 3) {
+        showError("Please enter at least 3 characters for search.");
+        return;
+      }
 
-    hideError();
-    renderBooks(query);
-    searchInput.value = "";
-  }
+      hideError();
+      renderBooks(query);
+    }, 500);
 
-  if (searchBtn && searchInput) {
-    searchBtn.addEventListener("click", handleSearch);
+    searchInput.addEventListener("input", debouncedSearch);
 
     searchInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
-        handleSearch();
+        const query = searchInput.value.trim();
+        if (query.length >= 3) {
+          searchInput.value = "";
+          searchInput.blur();
+          hideError();
+          renderBooks(query);
+        }
       }
     });
 
-    searchInput.addEventListener("input", () => {
-      if (searchWrapper.classList.contains("error")) {
-        hideError();
-      }
+    searchInput.addEventListener("blur", () => {
+      searchInput.value = "";
+      hideError();
     });
   }
 

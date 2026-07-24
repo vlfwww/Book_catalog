@@ -47,7 +47,6 @@
   justify-content: center;
   max-width: 680px;
   width: 100%;
-  gap: 12px;
 
   @media (max-width: 480px) {
     display: flex;
@@ -93,24 +92,6 @@
   color: var(--text);
 }
 
-.search-bar button {
-  background-color: var(--green);
-  color: var(--white);
-  border: none;
-  border-radius: 10px;
-  padding: 14px 28px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-  box-shadow: 0 4px 12px rgba(196, 184, 168, 0.15);
-  white-space: nowrap;
-}
-
-.search-bar button:hover {
-  background-color: #1e523b;
-}
-
 .input-error-message {
   color: var(--red);
   font-size: 13px;
@@ -119,6 +100,11 @@
   width: 100%;
   text-align: left;
   padding-left: 5px;
+  display: none;
+}
+
+.input-error-message:not(:empty) {
+  display: block;
 }
 
 .btn-wrapper {
@@ -145,7 +131,6 @@
     font-family: "Playfair Display", serif;
     font-size: 14px;
     font-weight: 600;
-    justify-content: center;
     transition: background 0.2s ease;
     max-width: 350px;
     margin: 20px auto;
