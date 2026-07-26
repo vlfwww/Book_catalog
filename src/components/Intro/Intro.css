@@ -134,6 +134,10 @@
     transition: background 0.2s ease;
     max-width: 350px;
     margin: 20px auto;
+    & button {
+      border: none;
+      background-color: transparent;
+    }
   }
 
   .view-favorites-mobile-btn:hover {
