@@ -12,7 +12,7 @@ export function createIntro(books = [], onFilterChange = () => {}) {
     <div class="search-container">
       <div class="search-bar">
         <div class="search-input-wrapper" id="search-wrapper">
-          <img src="/assets/search.svg" class="search-icon" alt="Search" />
+          <img src="${import.meta.env.BASE_URL}assets/search.svg" class="search-icon" alt="Search" />
           <input
             type="text"
             id="search-input"
